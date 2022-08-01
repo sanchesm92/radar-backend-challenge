@@ -4,7 +4,6 @@ const validateInputs = (req, res, next) => {
   const { error } = Joi.object({
     atleta: Joi.string().required(),
     value: Joi.string().required(),
-    unidade: Joi.string().required(),
   }).validate(req.body);
   if (error) {
     next(error);

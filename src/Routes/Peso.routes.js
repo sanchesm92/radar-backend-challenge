@@ -1,8 +1,10 @@
 const express = require('express');
-const { getYoga } = require('../controller/Yoga.controller');
+const { postPeso, getPeso } = require('../controller/Peso.controller');
+const { validateInputs } = require('../middlewares/Input.middleware');
 
 const pesoRouter = express.Router();
 
-pesoRouter.get('/', getYoga);
+pesoRouter.get('/', getPeso);
+pesoRouter.post('/', validateInputs, postPeso);
 
 module.exports = pesoRouter;
