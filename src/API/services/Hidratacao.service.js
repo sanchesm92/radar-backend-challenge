@@ -24,9 +24,16 @@ const updateHidratacaoCompetition = async (id, obj) => {
   return result;
 };
 
+const destroyHidratacao = async (id) => {
+  await Hidratacao.destroy(
+    { where: { id } },
+  );
+};
+
 module.exports = {
   getHidratacoes,
   getHidratacaoById,
   updateHidratacaoCompetition,
   createNewHidratacao,
+  destroyHidratacao,
 };

@@ -1,5 +1,5 @@
 const {
-  getPesos, createNewPeso, updatePesoCompetition, getPesoById,
+  getPesos, createNewPeso, updatePesoCompetition, getPesoById, destroyPeso,
 } = require('../services/Peso.service');
 
 const getPeso = async (_req, res) => {
@@ -39,9 +39,20 @@ const updatePeso = async (req, res) => {
   }
 };
 
+const deletePeso = async (req, res) => {
+  try {
+    const { id } = req.params;
+    await destroyPeso(id);
+    return res.status(201).json({ status: 200, message: 'Deleted' });
+  } catch (error) {
+    return res.status(400).json({ message: error.message });
+  }
+};
+
 module.exports = {
   getPeso,
   postPeso,
   updatePeso,
   getPesoId,
+  deletePeso,
 };

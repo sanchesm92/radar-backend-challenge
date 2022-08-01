@@ -24,9 +24,16 @@ const updateDardosCompetition = async (id, obj) => {
   return result;
 };
 
+const destroyDardos = async (id) => {
+  await Dardos.destroy(
+    { where: { id } },
+  );
+};
+
 module.exports = {
   getDardos,
   createNewDardos,
   updateDardosCompetition,
   getDardosById,
+  destroyDardos,
 };

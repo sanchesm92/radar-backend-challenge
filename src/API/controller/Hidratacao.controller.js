@@ -1,5 +1,6 @@
 const {
-  getHidratacoes, createNewHidratacao, getHidratacaoById, updateHidratacaoCompetition,
+  getHidratacoes, createNewHidratacao,
+  getHidratacaoById, updateHidratacaoCompetition, destroyHidratacao,
 } = require('../services/Hidratacao.service');
 
 const getHidratacao = async (_req, res) => {
@@ -40,9 +41,20 @@ const updateHidratacao = async (req, res) => {
   }
 };
 
+const deleteHidratacao = async (req, res) => {
+  try {
+    const { id } = req.params;
+    await destroyHidratacao(id);
+    return res.status(201).json({ status: 200, message: 'Deleted' });
+  } catch (error) {
+    return res.status(400).json({ message: error.message });
+  }
+};
+
 module.exports = {
   getHidratacao,
   postHidratacao,
   getHidratacaoId,
   updateHidratacao,
+  deleteHidratacao,
 };

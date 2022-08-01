@@ -1,6 +1,6 @@
 const express = require('express');
 const {
-  postPeso, getPeso, getPesoId, updatePeso,
+  postPeso, getPeso, getPesoId, updatePeso, deletePeso,
 } = require('../controller/Peso.controller');
 const { validateInputs } = require('../middlewares/Input.middleware');
 
@@ -10,5 +10,6 @@ pesoRouter.get('/', getPeso);
 pesoRouter.get('/:id', getPesoId);
 pesoRouter.post('/', validateInputs, postPeso);
 pesoRouter.put('/:id', validateInputs, updatePeso);
+pesoRouter.delete('/:id', deletePeso);
 
 module.exports = pesoRouter;

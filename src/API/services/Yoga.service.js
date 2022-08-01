@@ -1,7 +1,7 @@
 const { Yoga } = require('../../Database/models');
 
 const getYogas = async () => {
-  const result = await Yoga.findAll();
+  const result = await Yoga.findAll({ raw: true });
   return result;
 };
 
@@ -24,9 +24,33 @@ const updateYogaCompetition = async (id, obj) => {
   return result;
 };
 
+const destroyYoga = async (id) => {
+  await Yoga.destroy(
+    { where: { id } },
+  );
+};
+
+const getRanking = async () => {
+  const allYogas = await getYogas();
+  const unityConvert = allYogas.map((person) => {
+    if (person.unidade === 'm') {
+      const value = Number(person.value) * 60;
+      return { ...person, value: `${value}` };
+    }
+    return { ...person };
+  }).sort((a, b) => Number(b.value) - Number(a.value));
+  const result = unityConvert.map(({ atleta }, index) => ({
+    position: index + 1,
+    atleta,
+  }));
+  return result;
+};
+
 module.exports = {
   getYogas,
   createNewYoga,
   updateYogaCompetition,
   getYogaById,
+  destroyYoga,
+  getRanking,
 };

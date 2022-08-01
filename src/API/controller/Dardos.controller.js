@@ -1,8 +1,8 @@
 const {
-  getDardos, createNewDardos, getDardosById, updateDardosCompetition,
+  getDardos, createNewDardos, getDardosById, updateDardosCompetition, destroyDardos,
 } = require('../services/Dardos.service');
 
-const getDardo = async (_req, res) => {
+const getAllDardos = async (_req, res) => {
   try {
     const dardos = await getDardos();
     return res.status(200).json(dardos);
@@ -40,9 +40,20 @@ const updateDardos = async (req, res) => {
   }
 };
 
+const deleteDardos = async (req, res) => {
+  try {
+    const { id } = req.params;
+    await destroyDardos(id);
+    return res.status(201).json({ status: 200, message: 'Deleted' });
+  } catch (error) {
+    return res.status(400).json({ message: error.message });
+  }
+};
+
 module.exports = {
-  getDardo,
+  getAllDardos,
   postDardo,
   updateDardos,
   getDardosId,
+  deleteDardos,
 };

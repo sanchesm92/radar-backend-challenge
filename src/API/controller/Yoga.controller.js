@@ -1,5 +1,5 @@
 const {
-  getYogas, createNewYoga, updateYogaCompetition, getYogaById,
+  getYogas, createNewYoga, updateYogaCompetition, getYogaById, destroyYoga, getRanking,
 } = require('../services/Yoga.service');
 
 const getYoga = async (_req, res) => {
@@ -39,9 +39,30 @@ const updateYoga = async (req, res) => {
   }
 };
 
+const deleteYoga = async (req, res) => {
+  try {
+    const { id } = req.params;
+    await destroyYoga(id);
+    return res.status(201).json({ status: 200, message: 'Deleted' });
+  } catch (error) {
+    return res.status(400).json({ message: error.message });
+  }
+};
+
+const getYogaRanking = async (_req, res) => {
+  try {
+    const result = await getRanking();
+    return res.status(201).json({ status: 200, Ranking: result });
+  } catch (error) {
+    return res.status(400).json({ message: error.message });
+  }
+};
+
 module.exports = {
   getYoga,
   postYoga,
   updateYoga,
   getYogaId,
+  deleteYoga,
+  getYogaRanking,
 };
