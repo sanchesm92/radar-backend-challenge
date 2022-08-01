@@ -16,39 +16,9 @@ const getPesos = async () => {
   return result;
 };
 
-const convertToNumber = (value, unidade) => {
-  let result = 0;
-  if (unidade === 'm') {
-    result = Number(value) * 60;
-  } else {
-    result = Number(value);
-  }
-  return result;
-};
-
-const validatePost = (current, updated) => {
-  const currentValue = convertToNumber(current.value, current.unidade);
-  const updatedValue = convertToNumber(updated.value, updated.unidade);
-  if (currentValue > updatedValue) {
-    return true;
-  }
-  return false;
-};
-
 const createNewPeso = async (obj) => {
   createOrUpdateStatus();
   const unidade = obj.unidade || 'cal';
-  const findObj = await Peso.findOne({ where: { atleta: obj.atleta } });
-  if (findObj) {
-    if (validatePost(findObj, obj)) {
-      return findObj;
-    }
-    const result = await Peso.update(
-      { ...obj },
-      { where: { atleta: obj.atleta } },
-    );
-    return result;
-  }
   const result = await Peso.create({ ...obj, competicao: 'competição perda de peso', unidade });
   return result;
 };
