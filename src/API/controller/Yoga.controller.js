@@ -1,5 +1,6 @@
 const {
-  getYogas, createNewYoga, updateYogaCompetition, getYogaById, destroyYoga, getRanking,
+  getYogas, createNewYoga,
+  updateYogaCompetition, getYogaById, destroyYoga, getRankingYoga,
 } = require('../services/Yoga.service');
 
 const getYoga = async (_req, res) => {
@@ -51,7 +52,7 @@ const deleteYoga = async (req, res) => {
 
 const getYogaRanking = async (_req, res) => {
   try {
-    const result = await getRanking();
+    const result = await getRankingYoga();
     return res.status(201).json({ status: 200, Ranking: result });
   } catch (error) {
     return res.status(400).json({ message: error.message });

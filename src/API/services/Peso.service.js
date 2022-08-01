@@ -1,7 +1,7 @@
 const { Peso } = require('../../Database/models');
 
 const getPesos = async () => {
-  const result = await Peso.findAll();
+  const result = await Peso.findAll({ raw: true });
   return result;
 };
 
@@ -30,7 +30,7 @@ const destroyPeso = async (id) => {
   );
 };
 
-const getRanking = async () => {
+const getRankingPeso = async () => {
   const allItens = await getPesos();
   const unityConvert = allItens.map((person) => {
     if (person.unidade === 'kcal') {
@@ -52,5 +52,5 @@ module.exports = {
   updatePesoCompetition,
   getPesoById,
   destroyPeso,
-  getRanking,
+  getRankingPeso,
 };

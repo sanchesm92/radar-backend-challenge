@@ -1,7 +1,7 @@
 const { Dardos } = require('../../Database/models');
 
 const getDardos = async () => {
-  const result = await Dardos.findAll();
+  const result = await Dardos.findAll({ raw: true });
   return result;
 };
 
@@ -30,10 +30,27 @@ const destroyDardos = async (id) => {
   );
 };
 
+const getRankingDardos = async () => {
+  const allItens = await getDardos();
+  const unityConvert = allItens.map((person) => {
+    if (person.unidade === 'cm') {
+      const value = Number(person.value) * 0.01;
+      return { ...person, value: `${value}` };
+    }
+    return { ...person };
+  }).sort((a, b) => Number(b.value) - Number(a.value));
+  const result = unityConvert.map(({ atleta }, index) => ({
+    position: index + 1,
+    atleta,
+  }));
+  return result;
+};
+
 module.exports = {
   getDardos,
   createNewDardos,
   updateDardosCompetition,
   getDardosById,
   destroyDardos,
+  getRankingDardos,
 };

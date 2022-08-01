@@ -30,7 +30,7 @@ const destroyYoga = async (id) => {
   );
 };
 
-const getRanking = async () => {
+const getRankingYoga = async () => {
   const allYogas = await getYogas();
   const unityConvert = allYogas.map((person) => {
     if (person.unidade === 'm') {
@@ -52,5 +52,5 @@ module.exports = {
   updateYogaCompetition,
   getYogaById,
   destroyYoga,
-  getRanking,
+  getRankingYoga,
 };

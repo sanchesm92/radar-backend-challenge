@@ -1,7 +1,7 @@
 const { Hidratacao } = require('../../Database/models');
 
 const getHidratacoes = async () => {
-  const result = await Hidratacao.findAll();
+  const result = await Hidratacao.findAll({ raw: true });
   return result;
 };
 
@@ -30,10 +30,27 @@ const destroyHidratacao = async (id) => {
   );
 };
 
+const getRankingHidratacao = async () => {
+  const allItens = await getHidratacoes();
+  const unityConvert = allItens.map((person) => {
+    if (person.unidade === 'ml') {
+      const value = Number(person.value) * 0.001;
+      return { ...person, value: `${value}` };
+    }
+    return { ...person };
+  }).sort((a, b) => Number(b.value) - Number(a.value));
+  const result = unityConvert.map(({ atleta }, index) => ({
+    position: index + 1,
+    atleta,
+  }));
+  return result;
+};
+
 module.exports = {
   getHidratacoes,
   getHidratacaoById,
   updateHidratacaoCompetition,
   createNewHidratacao,
   destroyHidratacao,
+  getRankingHidratacao,
 };

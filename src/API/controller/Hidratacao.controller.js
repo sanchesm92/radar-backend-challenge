@@ -1,6 +1,6 @@
 const {
   getHidratacoes, createNewHidratacao,
-  getHidratacaoById, updateHidratacaoCompetition, destroyHidratacao,
+  getHidratacaoById, updateHidratacaoCompetition, destroyHidratacao, getRankingHidratacao,
 } = require('../services/Hidratacao.service');
 
 const getHidratacao = async (_req, res) => {
@@ -51,10 +51,20 @@ const deleteHidratacao = async (req, res) => {
   }
 };
 
+const getHidratacaoRanking = async (_req, res) => {
+  try {
+    const result = await getRankingHidratacao();
+    return res.status(201).json({ status: 200, Ranking: result });
+  } catch (error) {
+    return res.status(400).json({ message: error.message });
+  }
+};
+
 module.exports = {
   getHidratacao,
   postHidratacao,
   getHidratacaoId,
   updateHidratacao,
   deleteHidratacao,
+  getHidratacaoRanking,
 };

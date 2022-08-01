@@ -1,5 +1,6 @@
 const {
-  getDardos, createNewDardos, getDardosById, updateDardosCompetition, destroyDardos,
+  getDardos, createNewDardos,
+  getDardosById, updateDardosCompetition, destroyDardos, getRankingDardos,
 } = require('../services/Dardos.service');
 
 const getAllDardos = async (_req, res) => {
@@ -50,10 +51,20 @@ const deleteDardos = async (req, res) => {
   }
 };
 
+const getDardosRanking = async (_req, res) => {
+  try {
+    const result = await getRankingDardos();
+    return res.status(201).json({ status: 200, Ranking: result });
+  } catch (error) {
+    return res.status(400).json({ message: error.message });
+  }
+};
+
 module.exports = {
   getAllDardos,
   postDardo,
   updateDardos,
   getDardosId,
   deleteDardos,
+  getDardosRanking,
 };
