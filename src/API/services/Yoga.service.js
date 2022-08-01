@@ -11,7 +11,22 @@ const createNewYoga = async (obj) => {
   return result;
 };
 
+const getYogaById = async (id) => {
+  const result = await Yoga.findByPk(id);
+  return result;
+};
+
+const updateYogaCompetition = async (id, obj) => {
+  const result = await Yoga.update(
+    { ...obj },
+    { where: { id } },
+  );
+  return result;
+};
+
 module.exports = {
   getYogas,
   createNewYoga,
+  updateYogaCompetition,
+  getYogaById,
 };

@@ -1,4 +1,6 @@
-const { getYogas, createNewYoga } = require('../services/Yoga.service');
+const {
+  getYogas, createNewYoga, updateYogaCompetition, getYogaById,
+} = require('../services/Yoga.service');
 
 const getYoga = async (_req, res) => {
   try {
@@ -9,6 +11,15 @@ const getYoga = async (_req, res) => {
   }
 };
 
+const getYogaId = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const yoga = await getYogaById(id);
+    return res.status(200).json(yoga);
+  } catch (error) {
+    return res.status(400).json({ message: error.message });
+  }
+};
 const postYoga = async (req, res) => {
   try {
     const yoga = await createNewYoga(req.body);
@@ -18,7 +29,19 @@ const postYoga = async (req, res) => {
   }
 };
 
+const updateYoga = async (req, res) => {
+  try {
+    const { id } = req.params;
+    await updateYogaCompetition(id, req.body);
+    return res.status(201).json({ status: 200, message: 'Updated' });
+  } catch (error) {
+    return res.status(400).json({ message: error.message });
+  }
+};
+
 module.exports = {
   getYoga,
   postYoga,
+  updateYoga,
+  getYogaId,
 };
