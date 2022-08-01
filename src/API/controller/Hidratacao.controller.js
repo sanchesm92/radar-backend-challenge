@@ -45,7 +45,7 @@ const deleteHidratacao = async (req, res) => {
   try {
     const { id } = req.params;
     await destroyHidratacao(id);
-    return res.status(201).json({ status: 200, message: 'Deleted' });
+    return res.status(204).json({ status: 200, message: 'Deleted' });
   } catch (error) {
     return res.status(400).json({ message: error.message });
   }
