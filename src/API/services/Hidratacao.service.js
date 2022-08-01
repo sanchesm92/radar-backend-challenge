@@ -11,7 +11,22 @@ const createNewHidratacao = async (obj) => {
   return result;
 };
 
+const getHidratacaoById = async (id) => {
+  const result = await Hidratacao.findByPk(id);
+  return result;
+};
+
+const updateHidratacaoCompetition = async (id, obj) => {
+  const result = await Hidratacao.update(
+    { ...obj },
+    { where: { id } },
+  );
+  return result;
+};
+
 module.exports = {
   getHidratacoes,
+  getHidratacaoById,
+  updateHidratacaoCompetition,
   createNewHidratacao,
 };

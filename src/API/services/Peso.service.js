@@ -5,14 +5,14 @@ const getPesos = async () => {
   return result;
 };
 
-const getPesoById = async (id) => {
-  const result = await Peso.findByPk(id);
-  return result;
-};
-
 const createNewPeso = async (obj) => {
   const unidade = obj.unidade || 'cal';
   const result = await Peso.create({ ...obj, competicao: 'competição perda de peso', unidade });
+  return result;
+};
+
+const getPesoById = async (id) => {
+  const result = await Peso.findByPk(id);
   return result;
 };
 

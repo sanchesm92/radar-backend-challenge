@@ -1,4 +1,6 @@
-const { getHidratacoes, createNewHidratacao } = require('../services/Hidratacao.service');
+const {
+  getHidratacoes, createNewHidratacao, getHidratacaoById, updateHidratacaoCompetition,
+} = require('../services/Hidratacao.service');
 
 const getHidratacao = async (_req, res) => {
   try {
@@ -18,7 +20,29 @@ const postHidratacao = async (req, res) => {
   }
 };
 
+const getHidratacaoId = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const hidratacao = await getHidratacaoById(id);
+    return res.status(200).json(hidratacao);
+  } catch (error) {
+    return res.status(400).json({ message: error.message });
+  }
+};
+
+const updateHidratacao = async (req, res) => {
+  try {
+    const { id } = req.params;
+    await updateHidratacaoCompetition(id, req.body);
+    return res.status(201).json({ status: 200, message: 'Updated' });
+  } catch (error) {
+    return res.status(400).json({ message: error.message });
+  }
+};
+
 module.exports = {
   getHidratacao,
   postHidratacao,
+  getHidratacaoId,
+  updateHidratacao,
 };

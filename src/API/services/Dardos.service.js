@@ -11,7 +11,22 @@ const createNewDardos = async (obj) => {
   return result;
 };
 
+const getDardosById = async (id) => {
+  const result = await Dardos.findByPk(id);
+  return result;
+};
+
+const updateDardosCompetition = async (id, obj) => {
+  const result = await Dardos.update(
+    { ...obj },
+    { where: { id } },
+  );
+  return result;
+};
+
 module.exports = {
   getDardos,
   createNewDardos,
+  updateDardosCompetition,
+  getDardosById,
 };
