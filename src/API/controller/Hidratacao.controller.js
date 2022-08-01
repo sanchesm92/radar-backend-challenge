@@ -51,9 +51,13 @@ const deleteHidratacao = async (req, res) => {
   }
 };
 
-const getHidratacaoRanking = async (_req, res) => {
+const getHidratacaoRanking = async (req, res) => {
   try {
-    const result = await getRankingHidratacao();
+    let param = false;
+    if (req.originalUrl.includes('finish')) {
+      param = true;
+    }
+    const result = await getRankingHidratacao(param);
     return res.status(201).json({ status: 200, Ranking: result });
   } catch (error) {
     return res.status(400).json({ message: error.message });

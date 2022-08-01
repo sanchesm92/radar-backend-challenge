@@ -49,9 +49,13 @@ const deletePeso = async (req, res) => {
   }
 };
 
-const getPesoRanking = async (_req, res) => {
+const getPesoRanking = async (req, res) => {
   try {
-    const result = await getRankingPeso();
+    let param = false;
+    if (req.originalUrl.includes('finish')) {
+      param = true;
+    }
+    const result = await getRankingPeso(param);
     return res.status(201).json({ status: 200, Ranking: result });
   } catch (error) {
     return res.status(400).json({ message: error.message });

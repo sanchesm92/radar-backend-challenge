@@ -51,9 +51,13 @@ const deleteDardos = async (req, res) => {
   }
 };
 
-const getDardosRanking = async (_req, res) => {
+const getDardosRanking = async (req, res) => {
   try {
-    const result = await getRankingDardos();
+    let param = false;
+    if (req.originalUrl.includes('finish')) {
+      param = true;
+    }
+    const result = await getRankingDardos(param);
     return res.status(201).json({ status: 200, Ranking: result });
   } catch (error) {
     return res.status(400).json({ message: error.message });
