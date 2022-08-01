@@ -1,4 +1,4 @@
-const { Hidratacao } = require('../models');
+const { Hidratacao } = require('../../Database/models');
 
 const getHidratacoes = async () => {
   const result = await Hidratacao.findAll();

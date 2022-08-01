@@ -1,4 +1,4 @@
-const { Yoga } = require('../models');
+const { Yoga } = require('../../Database/models');
 
 const getYogas = async () => {
   const result = await Yoga.findAll();

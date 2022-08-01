@@ -1,4 +1,4 @@
-const { Dardos } = require('../models');
+const { Dardos } = require('../../Database/models');
 
 const getDardos = async () => {
   const result = await Dardos.findAll();

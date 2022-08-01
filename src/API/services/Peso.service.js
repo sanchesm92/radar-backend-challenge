@@ -1,4 +1,4 @@
-const { Peso } = require('../models');
+const { Peso } = require('../../Database/models');
 
 const getPesos = async () => {
   const result = await Peso.findAll();
