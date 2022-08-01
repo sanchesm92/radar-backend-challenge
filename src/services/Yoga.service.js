@@ -6,7 +6,8 @@ const getYogas = async () => {
 };
 
 const createNewYoga = async (obj) => {
-  const result = await Yoga.create({ ...obj, competicao: 'competição yoga', unidade: 's' });
+  const unidade = obj.unidade || 's';
+  const result = await Yoga.create({ ...obj, competicao: 'competição yoga', unidade });
   return result;
 };
 

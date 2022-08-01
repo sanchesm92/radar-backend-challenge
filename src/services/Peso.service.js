@@ -6,7 +6,8 @@ const getPesos = async () => {
 };
 
 const createNewPeso = async (obj) => {
-  const result = await Peso.create({ ...obj, competicao: 'competição perda de peso', unidade: 'cal' });
+  const unidade = obj.unidade || 'cal';
+  const result = await Peso.create({ ...obj, competicao: 'competição perda de peso', unidade });
   return result;
 };
 
