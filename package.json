@@ -4,7 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "mocha ./src/tests/*$NAME*.{test,spec}.js -t 10000 --exit"
+    "test": "mocha ./src/tests/*$NAME*.{test,spec}.js -t 10000 --exit",
+    "db:create": "cd src/Database; npx sequelize db:migrate",
+    "api:start": "cd src/API; node .",
+    "start":  "npm run db:create && npm run api:start"
   },
   "keywords": [],
   "author": "",
